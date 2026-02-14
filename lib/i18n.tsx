@@ -15,6 +15,7 @@ const translations: Translations = {
   // Navigation
   "nav.home": { fr: "Accueil", en: "Home" },
   "nav.services": { fr: "Services", en: "Services" },
+  "nav.projects": { fr: "Projets", en: "Projects" },
   "nav.about": { fr: "A propos", en: "About" },
   "nav.contact": { fr: "Contact", en: "Contact" },
   "nav.cta": { fr: "Commencer", en: "Get Started" },
@@ -228,6 +229,82 @@ const translations: Translations = {
     fr: "Une expertise technique remarquable et une approche tr\u00e8s professionnelle. LambdaX a su transformer nos donn\u00e9es en v\u00e9ritable avantage comp\u00e9titif.",
     en: "Remarkable technical expertise and a very professional approach. LambdaX successfully transformed our data into a real competitive advantage."
   },
+
+  // Projects
+  "projects.tag": { fr: "Nos Projets", en: "Our Projects" },
+  "projects.title": { fr: "Projets R\u00e9alis\u00e9s", en: "Completed Projects" },
+  "projects.subtitle": {
+    fr: "D\u00e9couvrez nos r\u00e9alisations et les solutions IA que nous avons d\u00e9velopp\u00e9es pour nos clients.",
+    en: "Discover our achievements and the AI solutions we have developed for our clients."
+  },
+  "projects.tech": { fr: "Technologies", en: "Technologies" },
+  "projects.results": { fr: "R\u00e9sultats", en: "Results" },
+  "projects.learnmore": { fr: "En savoir plus", en: "Learn more" },
+  "projects.portfolio.title": { fr: "Portfolio", en: "Portfolio" },
+  "projects.portfolio.subtitle": {
+    fr: "Une s\u00e9lection de nos projets les plus marquants dans diff\u00e9rents secteurs d'activit\u00e9.",
+    en: "A selection of our most significant projects across different business sectors."
+  },
+  "projects.cta.title": { fr: "Un projet en t\u00eate ?", en: "Have a project in mind?" },
+  "projects.cta.subtitle": {
+    fr: "Discutons de votre projet et d\u00e9couvrons comment l'IA peut transformer votre entreprise.",
+    en: "Let's discuss your project and discover how AI can transform your business."
+  },
+  "projects.cta.button": { fr: "D\u00e9marrer un projet", en: "Start a project" },
+  "projects.stats.projects": { fr: "150+", en: "150+" },
+  "projects.stats.projects.label": { fr: "Projets Livr\u00e9s", en: "Projects Delivered" },
+  "projects.stats.success": { fr: "98%", en: "98%" },
+  "projects.stats.success.label": { fr: "Taux de R\u00e9ussite", en: "Success Rate" },
+  "projects.stats.efficiency": { fr: "45%", en: "45%" },
+  "projects.stats.efficiency.label": { fr: "Gain d'Efficacit\u00e9 Moyen", en: "Average Efficiency Gain" },
+  "projects.project1.title": { fr: "Syst\u00e8me de Pr\u00e9diction des Ventes", en: "Sales Prediction System" },
+  "projects.project1.desc": {
+    fr: "D\u00e9veloppement d'un mod\u00e8le de machine learning pour pr\u00e9dire les ventes avec une pr\u00e9cision de 94%, permettant une optimisation des stocks et une r\u00e9duction des co\u00fbts.",
+    en: "Development of a machine learning model to predict sales with 94% accuracy, enabling inventory optimization and cost reduction."
+  },
+  "projects.project1.category": { fr: "Machine Learning", en: "Machine Learning" },
+  "projects.project1.tech": { fr: "Python, TensorFlow, Scikit-learn, PostgreSQL", en: "Python, TensorFlow, Scikit-learn, PostgreSQL" },
+  "projects.project1.results": { fr: "94% de pr\u00e9cision, 30% de r\u00e9duction des stocks", en: "94% accuracy, 30% inventory reduction" },
+  "projects.project2.title": { fr: "Plateforme d'Analyse de Donn\u00e9es", en: "Data Analytics Platform" },
+  "projects.project2.desc": {
+    fr: "Cr\u00e9ation d'une plateforme compl\u00e8te d'analyse de donn\u00e9es en temps r\u00e9el avec visualisations interactives et tableaux de bord personnalisables.",
+    en: "Creation of a comprehensive real-time data analytics platform with interactive visualizations and customizable dashboards."
+  },
+  "projects.project2.category": { fr: "Data Analytics", en: "Data Analytics" },
+  "projects.project2.tech": { fr: "React, Node.js, Apache Spark, MongoDB", en: "React, Node.js, Apache Spark, MongoDB" },
+  "projects.project2.results": { fr: "Temps d'analyse r\u00e9duit de 80%, 500+ utilisateurs", en: "Analysis time reduced by 80%, 500+ users" },
+  "projects.project3.title": { fr: "Assistant IA pour Service Client", en: "AI Customer Service Assistant" },
+  "projects.project3.desc": {
+    fr: "Impl\u00e9mentation d'un chatbot intelligent utilisant le NLP pour g\u00e9rer 70% des requ\u00eates clients automatiquement, am\u00e9liorant la satisfaction client de 35%.",
+    en: "Implementation of an intelligent chatbot using NLP to handle 70% of customer requests automatically, improving customer satisfaction by 35%."
+  },
+  "projects.project3.category": { fr: "NLP & Chatbot", en: "NLP & Chatbot" },
+  "projects.project3.tech": { fr: "OpenAI GPT, Python, FastAPI, Redis", en: "OpenAI GPT, Python, FastAPI, Redis" },
+  "projects.project3.results": { fr: "70% de requ\u00eates automatis\u00e9es, +35% de satisfaction", en: "70% automated requests, +35% satisfaction" },
+  "projects.project4.title": { fr: "Optimisation de Cha\u00eene Logistique", en: "Supply Chain Optimization" },
+  "projects.project4.desc": {
+    fr: "D\u00e9veloppement d'un syst\u00e8me d'optimisation utilisant l'IA pour r\u00e9duire les co\u00fbtts logistiques de 25% et am\u00e9liorer les d\u00e9lais de livraison.",
+    en: "Development of an optimization system using AI to reduce logistics costs by 25% and improve delivery times."
+  },
+  "projects.project4.category": { fr: "Optimisation", en: "Optimization" },
+  "projects.project4.tech": { fr: "Python, Gurobi, Apache Kafka, Docker", en: "Python, Gurobi, Apache Kafka, Docker" },
+  "projects.project4.results": { fr: "25% de r\u00e9duction des co\u00fbtts, d\u00e9lais -40%", en: "25% cost reduction, 40% faster delivery" },
+  "projects.project5.title": { fr: "D\u00e9tection de Fraude en Temps R\u00e9el", en: "Real-time Fraud Detection" },
+  "projects.project5.desc": {
+    fr: "Syst\u00e8me de d\u00e9tection de fraude bas\u00e9 sur le deep learning pour identifier les transactions suspectes avec une pr\u00e9cision de 99.2%.",
+    en: "Deep learning-based fraud detection system to identify suspicious transactions with 99.2% accuracy."
+  },
+  "projects.project5.category": { fr: "S\u00e9curit\u00e9", en: "Security" },
+  "projects.project5.tech": { fr: "TensorFlow, Python, Apache Flink, Elasticsearch", en: "TensorFlow, Python, Apache Flink, Elasticsearch" },
+  "projects.project5.results": { fr: "99.2% de pr\u00e9cision, 0.01% de faux positifs", en: "99.2% accuracy, 0.01% false positives" },
+  "projects.project6.title": { fr: "Reconnaissance Vocale Multilingue", en: "Multilingual Speech Recognition" },
+  "projects.project6.desc": {
+    fr: "D\u00e9veloppement d'un syst\u00e8me de reconnaissance vocale supportant 12 langues avec une pr\u00e9cision de 96% pour l'automatisation des centres d'appels.",
+    en: "Development of a speech recognition system supporting 12 languages with 96% accuracy for call center automation."
+  },
+  "projects.project6.category": { fr: "Speech Recognition", en: "Speech Recognition" },
+  "projects.project6.tech": { fr: "PyTorch, Whisper, WebRTC, Kubernetes", en: "PyTorch, Whisper, WebRTC, Kubernetes" },
+  "projects.project6.results": { fr: "96% de pr\u00e9cision, 12 langues support\u00e9es", en: "96% accuracy, 12 languages supported" },
 }
 
 type I18nContextType = {
