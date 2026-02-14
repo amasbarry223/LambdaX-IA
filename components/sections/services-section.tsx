@@ -3,10 +3,61 @@
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { useMagnetic } from "@/hooks/use-magnetic"
 import { Database, Brain, BarChart3, Rocket, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const serviceIcons = [Database, Brain, BarChart3, Rocket]
+
+function ServiceCard({ titleKey, descKey, Icon, index, isVisible }: {
+  titleKey: string
+  descKey: string
+  Icon: typeof Database
+  index: number
+  isVisible: boolean
+}) {
+  const { t } = useI18n()
+  const magneticRef = useMagnetic<HTMLDivElement>({ strength: 0.15 })
+
+  return (
+    <div
+      ref={magneticRef}
+      className={cn(
+        "group relative rounded-xl border border-border/80 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:border-primary/50 hover:bg-card hover:shadow-lg hover:shadow-primary/5 hover:neon-glow magnetic-hover",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      )}
+      style={{ transitionDelay: isVisible ? `${(index + 1) * 150}ms` : "0ms" }}
+    >
+      {/* Gradient overlay au hover */}
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      
+      {/* Number */}
+      <span className="absolute top-6 right-6 font-heading text-6xl font-black text-primary/5 transition-colors group-hover:text-primary/10">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 transition-all duration-300 group-hover:bg-primary/10 group-hover:border-primary/40 group-hover:scale-110">
+        <Icon className="h-6 w-6 text-primary" />
+      </div>
+
+      <h3 className="mb-3 font-heading text-xl font-bold text-foreground transition-colors group-hover:text-primary">
+        {t(titleKey)}
+      </h3>
+
+      <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+        {t(descKey)}
+      </p>
+
+      <Link
+        href="/services"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:gap-2"
+      >
+        {t("services.learnmore")}
+        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+      </Link>
+    </div>
+  )
+}
 
 export function ServicesSection() {
   const { t } = useI18n()
@@ -20,7 +71,7 @@ export function ServicesSection() {
   ]
 
   return (
-    <section id="services" className="relative py-24 lg:py-32 border-t border-border/50 bg-gradient-to-b from-background via-background to-muted/20">
+    <section id="services" className="relative py-24 lg:py-32 border-t border-border/50 bg-gradient-to-b from-background via-background to-muted/20 animated-gradient-bg">
       {/* Séparateur décoratif */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
@@ -53,39 +104,14 @@ export function ServicesSection() {
         {/* Services Grid */}
         <div className="grid gap-6 md:grid-cols-2">
           {services.map(({ titleKey, descKey, Icon }, i) => (
-            <div
+            <ServiceCard
               key={titleKey}
-              className={cn(
-                "group relative rounded-xl border border-border/80 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:border-primary/50 hover:bg-card hover:shadow-lg hover:shadow-primary/5 hover:neon-glow",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              )}
-              style={{ transitionDelay: isVisible ? `${(i + 1) * 150}ms` : "0ms" }}
-            >
-              {/* Number */}
-              <span className="absolute top-6 right-6 font-heading text-6xl font-black text-primary/5 transition-colors group-hover:text-primary/10">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/5 transition-all duration-300 group-hover:bg-primary/10 group-hover:border-primary/40">
-                <Icon className="h-6 w-6 text-primary" />
-              </div>
-
-              <h3 className="mb-3 font-heading text-xl font-bold text-foreground transition-colors group-hover:text-primary">
-                {t(titleKey)}
-              </h3>
-
-              <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-                {t(descKey)}
-              </p>
-
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100"
-              >
-                {t("services.learnmore")}
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
+              titleKey={titleKey}
+              descKey={descKey}
+              Icon={Icon}
+              index={i}
+              isVisible={isVisible}
+            />
           ))}
         </div>
       </div>

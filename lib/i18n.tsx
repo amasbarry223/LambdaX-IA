@@ -22,13 +22,13 @@ const translations: Translations = {
 
   // Hero
   "hero.tag": { fr: "Intelligence Artificielle", en: "Artificial Intelligence" },
-  "hero.title1": { fr: "Transformez", en: "Transform" },
-  "hero.title2": { fr: "vos donn\u00e9es", en: "your data" },
-  "hero.title3": { fr: "en avantage", en: "into a" },
-  "hero.title4": { fr: "comp\u00e9titif", en: "competitive edge" },
+  "hero.title1": { fr: "Vos donn\u00e9es ont", en: "Your data has" },
+  "hero.title2": { fr: "une voix", en: "a voice" },
+  "hero.title3": { fr: "Nous la", en: "We" },
+  "hero.title4": { fr: "r\u00e9v\u00e9lons", en: "reveal it" },
   "hero.subtitle": {
-    fr: "LambdaX AI est un cabinet de conseil sp\u00e9cialis\u00e9 en Intelligence Artificielle qui aide les entreprises \u00e0 exploiter la puissance de l'IA pour acc\u00e9l\u00e9rer leur croissance et optimiser leurs op\u00e9rations.",
-    en: "LambdaX AI is a consulting firm specialized in Artificial Intelligence, helping businesses harness the power of AI to accelerate growth and optimize operations."
+    fr: "LambdaX AI est un partenaire strat\u00e9gique en intelligence d\u00e9cisionnelle. Nous transformons vos donn\u00e9es en intelligence et l'intelligence en d\u00e9cisions strat\u00e9giques. Nous d\u00e9veloppons des plateformes web et mobiles, des syst\u00e8mes intelligents bas\u00e9s sur le machine learning, et des solutions d'automatisation pour cr\u00e9er un avantage concurrentiel durable.",
+    en: "LambdaX AI is a strategic partner in decision intelligence. We transform your data into intelligence and intelligence into strategic decisions. We develop web and mobile platforms, intelligent systems based on machine learning, and automation solutions to create a sustainable competitive advantage."
   },
   "hero.cta1": { fr: "D\u00e9couvrir nos services", en: "Discover our services" },
   "hero.cta2": { fr: "Nous contacter", en: "Contact us" },
@@ -38,8 +38,8 @@ const translations: Translations = {
   "services.tag": { fr: "Nos Services", en: "Our Services" },
   "services.title": { fr: "Des solutions IA sur mesure", en: "Tailored AI solutions" },
   "services.subtitle": {
-    fr: "Nous accompagnons les entreprises dans leur transformation digitale avec des solutions d'IA adapt\u00e9es \u00e0 leurs besoins sp\u00e9cifiques.",
-    en: "We support businesses in their digital transformation with AI solutions tailored to their specific needs."
+    fr: "Nous aidons nos partenaires \u00e0 structurer leurs donn\u00e9es, nettoyer et qualifier leurs bases, cr\u00e9er des pipelines data robustes, d\u00e9velopper des mod\u00e8les pr\u00e9dictifs, automatiser les d\u00e9cisions r\u00e9p\u00e9titives et am\u00e9liorer leurs performances op\u00e9rationnelles.",
+    en: "We help our partners structure their data, clean and qualify their databases, create robust data pipelines, develop predictive models, automate repetitive decisions, and improve their operational performance."
   },
   "services.data.title": { fr: "Audit Data & IA", en: "Data & AI Audit" },
   "services.data.desc": {
@@ -121,8 +121,8 @@ const translations: Translations = {
 
   // Footer
   "footer.tagline": {
-    fr: "Cabinet de conseil en Intelligence Artificielle. Nous transformons vos donn\u00e9es en avantage comp\u00e9titif.",
-    en: "Artificial Intelligence consulting firm. We transform your data into a competitive advantage."
+    fr: "Partenaire strat\u00e9gique en intelligence d\u00e9cisionnelle. Vos donn\u00e9es ont une voix. Nous la r\u00e9v\u00e9lons.",
+    en: "Strategic partner in decision intelligence. Your data has a voice. We reveal it."
   },
   "footer.navigation": { fr: "Navigation", en: "Navigation" },
   "footer.services": { fr: "Services", en: "Services" },
@@ -135,18 +135,18 @@ const translations: Translations = {
   "about.tag": { fr: "A propos", en: "About Us" },
   "about.title": { fr: "Qui sommes-nous ?", en: "Who are we?" },
   "about.subtitle": {
-    fr: "LambdaX AI est n\u00e9 de la conviction que l'intelligence artificielle doit \u00eatre accessible, \u00e9thique et cr\u00e9atrice de valeur pour toutes les entreprises.",
-    en: "LambdaX AI was born from the conviction that artificial intelligence should be accessible, ethical, and value-creating for all businesses."
+    fr: "LambdaX AI est une entreprise technologique sp\u00e9cialis\u00e9e dans le d\u00e9veloppement de solutions d'intelligence artificielle bas\u00e9es sur les donn\u00e9es des entreprises. Nous croyons que chaque entreprise poss\u00e8de un capital cach\u00e9 : ses donn\u00e9es.",
+    en: "LambdaX AI is a technology company specialized in developing artificial intelligence solutions based on business data. We believe that every company has a hidden asset: its data."
   },
   "about.mission.title": { fr: "Notre Mission", en: "Our Mission" },
   "about.mission.desc": {
-    fr: "D\u00e9mocratiser l'acc\u00e8s \u00e0 l'intelligence artificielle et permettre \u00e0 chaque entreprise, quelle que soit sa taille, de b\u00e9n\u00e9ficier de la puissance des donn\u00e9es et de l'IA pour prendre de meilleures d\u00e9cisions.",
-    en: "Democratize access to artificial intelligence and enable every business, regardless of size, to benefit from the power of data and AI to make better decisions."
+    fr: "Transformer les donn\u00e9es en intelligence. Transformer l'intelligence en d\u00e9cisions strat\u00e9giques. Nous accompagnons les entreprises dans leur transformation digitale en d\u00e9veloppant des plateformes web et mobiles sur mesure, des syst\u00e8mes intelligents bas\u00e9s sur le machine learning, des solutions d'automatisation des processus m\u00e9tiers, et des outils d'analyse pr\u00e9dictive.",
+    en: "Transform data into intelligence. Transform intelligence into strategic decisions. We support businesses in their digital transformation by developing custom web and mobile platforms, intelligent systems based on machine learning, business process automation solutions, and predictive analytics tools."
   },
   "about.vision.title": { fr: "Notre Vision", en: "Our Vision" },
   "about.vision.desc": {
-    fr: "Devenir le partenaire IA de r\u00e9f\u00e9rence en Europe francophone, reconnu pour l'excellence de nos solutions, notre approche \u00e9thique et notre impact mesurable sur la performance de nos clients.",
-    en: "Become the leading AI partner in French-speaking Europe, recognized for the excellence of our solutions, our ethical approach, and our measurable impact on our clients' performance."
+    fr: "Construire de l'intelligence \u00e0 partir des donn\u00e9es r\u00e9elles des organisations, afin de cr\u00e9er un avantage concurrentiel durable. Nous faisons parler les donn\u00e9es pour optimiser les ventes, r\u00e9duire les co\u00fbts, pr\u00e9voir la demande, d\u00e9tecter les fraudes, automatiser les workflows et am\u00e9liorer l'exp\u00e9rience client.",
+    en: "Build intelligence from organizations' real data to create a sustainable competitive advantage. We make data speak to optimize sales, reduce costs, forecast demand, detect fraud, automate workflows, and improve customer experience."
   },
   "about.values.title": { fr: "Nos Valeurs", en: "Our Values" },
   "about.value1.title": { fr: "Innovation", en: "Innovation" },

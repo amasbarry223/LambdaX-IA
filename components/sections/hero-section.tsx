@@ -110,9 +110,16 @@ export function HeroSection() {
   }, [prefersReducedMotion])
 
   return (
-    <section ref={sectionRef} className="relative min-h-[calc(100vh-73px)] flex items-center overflow-hidden grid-bg">
+    <section ref={sectionRef} className="relative min-h-[calc(100vh-73px)] flex items-center overflow-hidden grid-bg animated-gradient-bg">
       {/* Gradient de transition vers la section suivante */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-20" />
+      
+      {/* Blur morph shapes - Effet moderne */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-blur-morph" style={{ animationDelay: "0s" }} />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-blur-morph" style={{ animationDelay: "5s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/8 rounded-full blur-3xl animate-blur-morph" style={{ animationDelay: "10s" }} />
+      </div>
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="decorative-dot absolute top-20 left-10 h-1 w-1 rounded-full bg-primary/60 animate-pulse-glow" />
@@ -192,7 +199,7 @@ export function HeroSection() {
               >
                 <Link
                   href="/services"
-                  className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:neon-glow hover:brightness-110"
+                  className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:neon-glow hover:brightness-110 magnetic-hover animate-glow-pulse"
                 >
                   {t("hero.cta1")}
                   <motion.div
@@ -245,7 +252,7 @@ export function HeroSection() {
                 {/* Center element */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative">
-                    <div className="h-32 w-32 rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-sm neon-glow animate-float flex items-center justify-center">
+                    <div className="h-32 w-32 rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-sm neon-glow animate-float animate-glow-pulse flex items-center justify-center">
                       <span className="font-heading text-5xl font-black text-primary neon-text">{"\u03BB"}</span>
                     </div>
                     {/* Orbiting dots */}

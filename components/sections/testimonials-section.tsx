@@ -107,10 +107,10 @@ function TestimonialCard({
       role="article"
       aria-label={`Témoignage de ${t(testimonial.nameKey)}`}
       className={cn(
-        "group relative flex-shrink-0 rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl p-8 transition-all duration-300",
+        "group relative flex-shrink-0 rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl p-6 transition-all duration-300",
         "hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10",
         "focus-within:ring-2 focus-within:ring-primary/50 focus-within:outline-none",
-        "w-[90vw] sm:w-[420px] md:w-[480px] lg:w-[520px]",
+        "w-[85vw] sm:w-[360px] md:w-[400px] lg:w-[420px]",
         isPaused && "opacity-90"
       )}
       style={{
@@ -126,10 +126,10 @@ function TestimonialCard({
       />
 
       {/* Quote Icon avec animation */}
-      <div className="relative mb-6 flex items-start justify-between">
+      <div className="relative mb-4 flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex-shrink-0 rounded-xl border border-primary/30 bg-primary/10 p-3 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
-            <Quote className="h-6 w-6 text-primary" />
+          <div className="flex-shrink-0 rounded-xl border border-primary/30 bg-primary/10 p-2.5 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+            <Quote className="h-5 w-5 text-primary" />
           </div>
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
@@ -155,28 +155,28 @@ function TestimonialCard({
       </div>
 
       {/* Testimonial Text avec meilleure typographie */}
-      <blockquote className="mb-8 text-lg leading-relaxed text-foreground/90 font-medium">
-        <span className="text-4xl leading-none text-primary/30 font-serif absolute -top-2 -left-1">
+      <blockquote className="mb-6 text-base leading-relaxed text-foreground/90 font-medium">
+        <span className="text-3xl leading-none text-primary/30 font-serif absolute -top-1 -left-1">
           &ldquo;
         </span>
-        <span className="relative z-10 pl-6">{t(testimonial.textKey)}</span>
-        <span className="text-4xl leading-none text-primary/30 font-serif">&rdquo;</span>
+        <span className="relative z-10 pl-5">{t(testimonial.textKey)}</span>
+        <span className="text-3xl leading-none text-primary/30 font-serif">&rdquo;</span>
       </blockquote>
 
       {/* Author Info amélioré */}
-      <div className="relative flex items-center gap-4 pt-6 border-t border-border/50">
+      <div className="relative flex items-center gap-3 pt-4 border-t border-border/50">
         <div className="relative">
-          <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 flex items-center justify-center border-2 border-primary/30 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
-            <span className="text-xl font-bold text-primary">{initials}</span>
+          <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 flex items-center justify-center border-2 border-primary/30 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-lg font-bold text-primary">{initials}</span>
           </div>
           {/* Glow effect au hover */}
           <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-foreground text-lg mb-1 truncate">
+          <p className="font-bold text-foreground text-base mb-0.5 truncate">
             {t(testimonial.nameKey)}
           </p>
-          <p className="text-sm text-muted-foreground truncate">
+          <p className="text-xs text-muted-foreground truncate">
             {t(testimonial.roleKey)}
           </p>
         </div>
@@ -242,7 +242,7 @@ export function TestimonialsSection() {
           if (!firstCard || firstCard.offsetWidth === 0) return
 
           const cardWidth = firstCard.offsetWidth
-          const gap = 24 // 1.5rem = 24px
+          const gap = 16 // 1rem = 16px (réduit de 24px)
           const singleSetWidth = (cardWidth + gap) * testimonials.length
 
           // Tuer l'animation précédente si elle existe
@@ -436,7 +436,7 @@ export function TestimonialsSection() {
         >
           <div
             ref={carouselRef}
-            className="flex gap-6 will-change-transform"
+            className="flex gap-4 will-change-transform"
             style={{
               width: "fit-content",
             }}

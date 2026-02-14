@@ -269,3 +269,135 @@ a, button, [role="button"] {
   background-size: 200% 100%;
   animation: shine 3s infinite;
 }
+
+/* Animated gradient background */
+@keyframes gradient-xy {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(
+    -45deg,
+    hsl(120 100% 50% / 0.03),
+    hsl(120 100% 50% / 0.01),
+    hsl(120 100% 50% / 0.05),
+    hsl(120 100% 50% / 0.02)
+  );
+  background-size: 400% 400%;
+  animation: gradient-xy 15s ease infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  66% {
+    transform: translateY(10px) translateX(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Magnetic effect */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.magnetic-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Glow pulse animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(120 100% 50% / 0.3),
+                0 0 40px hsl(120 100% 50% / 0.2),
+                0 0 60px hsl(120 100% 50% / 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(120 100% 50% / 0.5),
+                0 0 60px hsl(120 100% 50% / 0.3),
+                0 0 90px hsl(120 100% 50% / 0.2);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Blur morph effect */
+@keyframes blur-morph {
+  0%, 100% {
+    filter: blur(40px);
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    filter: blur(60px);
+    transform: scale(1.2) rotate(120deg);
+  }
+  66% {
+    filter: blur(50px);
+    transform: scale(0.9) rotate(240deg);
+  }
+}
+
+.animate-blur-morph {
+  animation: blur-morph 20s ease-in-out infinite;
+}
+
+/* Text reveal animation */
+@keyframes text-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.text-reveal {
+  animation: text-reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Gradient border animation */
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    hsl(120 100% 50% / 0.3),
+    hsl(120 100% 50% / 0.1),
+    hsl(120 100% 50% / 0.3)
+  );
+  background-size: 200% 100%;
+  animation: gradient-border 3s ease infinite;
+  padding: 1px;
+  border-radius: 0.5rem;
+}
+
+.gradient-border > * {
+  background: hsl(var(--background));
+  border-radius: calc(0.5rem - 1px);
+}
