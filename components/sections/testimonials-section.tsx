@@ -106,13 +106,13 @@ function TestimonialCard({
       ref={cardRef}
       role="article"
       aria-label={`Témoignage de ${t(testimonial.nameKey)}`}
-      className={cn(
-        "group relative flex-shrink-0 rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl p-6 transition-all duration-300",
-        "hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10",
-        "focus-within:ring-2 focus-within:ring-primary/50 focus-within:outline-none",
-        "w-[85vw] sm:w-[360px] md:w-[400px] lg:w-[420px]",
-        isPaused && "opacity-90"
-      )}
+        className={cn(
+          "group relative flex-shrink-0 rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl p-5 sm:p-6 transition-all duration-300",
+          "hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10",
+          "focus-within:ring-2 focus-within:ring-primary/50 focus-within:outline-none",
+          "w-[90vw] sm:w-[360px] md:w-[400px] lg:w-[420px]",
+          isPaused && "opacity-90"
+        )}
       style={{
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 255, 0, 0.05)",
       }}
@@ -372,7 +372,7 @@ export function TestimonialsSection() {
     <section
       ref={sectionRef}
       id="testimonials"
-      className="relative py-24 lg:py-32 border-t border-border/50 bg-gradient-to-b from-muted/20 via-background to-background overflow-hidden"
+      className="relative py-16 sm:py-24 lg:py-32 border-t border-border/50 bg-gradient-to-b from-muted/20 via-background to-background overflow-hidden"
       aria-label="Section témoignages clients"
     >
       {/* Éléments décoratifs améliorés */}
@@ -386,19 +386,19 @@ export function TestimonialsSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background pointer-events-none" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 z-10">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 z-10">
         {/* Section Header amélioré */}
-        <div ref={headerRef} className="mb-16 max-w-2xl">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 backdrop-blur-sm">
+        <div ref={headerRef} className="mb-12 sm:mb-16 max-w-2xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 sm:px-4 py-1 sm:py-1.5 backdrop-blur-sm">
             <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
+            <span className="text-[10px] sm:text-xs font-medium uppercase tracking-widest text-primary">
               {t("testimonials.tag")}
             </span>
           </div>
-          <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance mb-4">
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground md:text-4xl lg:text-5xl text-balance mb-3 sm:mb-4">
             {t("testimonials.title")}
           </h2>
-          <p className="text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
+          <p className="text-sm sm:text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
             {t("testimonials.subtitle")}
           </p>
         </div>
@@ -430,13 +430,13 @@ export function TestimonialsSection() {
 
         {/* Testimonials Carousel amélioré */}
         <div
-          className="overflow-hidden -mx-6 px-6"
+          className="overflow-hidden -mx-4 sm:-mx-6 px-4 sm:px-6"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <div
             ref={carouselRef}
-            className="flex gap-4 will-change-transform"
+            className="flex gap-3 sm:gap-4 will-change-transform"
             style={{
               width: "fit-content",
             }}

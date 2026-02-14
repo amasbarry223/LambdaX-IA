@@ -24,15 +24,60 @@ const translations: Translations = {
   "hero.tag": { fr: "Intelligence Artificielle", en: "Artificial Intelligence" },
   "hero.title1": { fr: "Vos donn\u00e9es ont", en: "Your data has" },
   "hero.title2": { fr: "une voix", en: "a voice" },
-  "hero.title3": { fr: "Nous la", en: "We" },
-  "hero.title4": { fr: "r\u00e9v\u00e9lons", en: "reveal it" },
+  "hero.title3": { fr: "", en: "" },
+  "hero.title4": { fr: "", en: "" },
   "hero.subtitle": {
-    fr: "LambdaX AI est un partenaire strat\u00e9gique en intelligence d\u00e9cisionnelle. Nous transformons vos donn\u00e9es en intelligence et l'intelligence en d\u00e9cisions strat\u00e9giques. Nous d\u00e9veloppons des plateformes web et mobiles, des syst\u00e8mes intelligents bas\u00e9s sur le machine learning, et des solutions d'automatisation pour cr\u00e9er un avantage concurrentiel durable.",
-    en: "LambdaX AI is a strategic partner in decision intelligence. We transform your data into intelligence and intelligence into strategic decisions. We develop web and mobile platforms, intelligent systems based on machine learning, and automation solutions to create a sustainable competitive advantage."
+    fr: "Partenaire strat\u00e9gique en intelligence d\u00e9cisionnelle. Nous transformons vos donn\u00e9es en avantage comp\u00e9titif.",
+    en: "Strategic partner in decision intelligence. We transform your data into a competitive advantage."
   },
   "hero.cta1": { fr: "D\u00e9couvrir nos services", en: "Discover our services" },
   "hero.cta2": { fr: "Nous contacter", en: "Contact us" },
   "hero.scroll": { fr: "D\u00e9filez pour explorer", en: "Scroll to explore" },
+  // Hero Slides - Versions courtes pour le slider
+  "hero.slide1.title": { fr: "Audit Data & IA", en: "Data Audit & AI" },
+  "hero.slide1.subtitle": {
+    fr: "Analyse compl\u00e8te de votre maturit\u00e9 data et identification des opportunit\u00e9s d'int\u00e9gration IA.",
+    en: "Complete analysis of your data maturity and identification of AI integration opportunities."
+  },
+  "hero.slide2.title": { fr: "Strat\u00e9gie IA", en: "AI Strategy" },
+  "hero.slide2.subtitle": {
+    fr: "Feuille de route IA sur mesure align\u00e9e avec vos objectifs business et votre budget.",
+    en: "Tailored AI roadmap aligned with your business objectives and budget."
+  },
+  "hero.slide3.title": { fr: "Decision Intelligence", en: "Decision Intelligence" },
+  "hero.slide3.subtitle": {
+    fr: "Syst\u00e8mes d'aide \u00e0 la d\u00e9cision bas\u00e9s sur l'IA pour optimiser vos performances.",
+    en: "AI-based decision support systems to optimize your performance."
+  },
+  // Hero Slides - Anciennes versions (gardées pour compatibilité)
+  "hero.slide1.title1": { fr: "Audit Data", en: "Data Audit" },
+  "hero.slide1.title2": { fr: "& IA", en: "& AI" },
+  "hero.slide1.title3": { fr: "", en: "" },
+  "hero.slide1.subtitle.full": {
+    fr: "Analyse compl\u00e8te de votre maturit\u00e9 data et identification des opportunit\u00e9s d'int\u00e9gration IA dans vos processus m\u00e9tier. Nous \u00e9valuons la qualit\u00e9, la structure et l'accessibilit\u00e9 de vos donn\u00e9es pour d\u00e9terminer leur potentiel d'exploitation par l'intelligence artificielle et d\u00e9finir une strat\u00e9gie de valorisation optimale.",
+    en: "Complete analysis of your data maturity and identification of AI integration opportunities in your business processes. We assess the quality, structure and accessibility of your data to determine its potential for exploitation by artificial intelligence and define an optimal valorization strategy."
+  },
+  "hero.slide2.title1": { fr: "Strat\u00e9gie", en: "AI" },
+  "hero.slide2.title2": { fr: "IA", en: "Strategy" },
+  "hero.slide2.title3": { fr: "", en: "" },
+  "hero.slide2.subtitle.full": {
+    fr: "D\u00e9finition d'une feuille de route IA align\u00e9e avec vos objectifs business et votre budget. Nous concevons une strat\u00e9gie sur mesure qui int\u00e8gre l'intelligence artificielle dans votre vision \u00e0 long terme, avec prioritisation des projets et planification des \u00e9tapes de d\u00e9ploiement pour maximiser votre retour sur investissement.",
+    en: "Definition of an AI roadmap aligned with your business objectives and budget. We design a tailored strategy that integrates artificial intelligence into your long-term vision, with project prioritization and deployment step planning to maximize your return on investment."
+  },
+  "hero.slide3.title1": { fr: "Decision", en: "Decision" },
+  "hero.slide3.title2": { fr: "Intelligence", en: "Intelligence" },
+  "hero.slide3.title3": { fr: "", en: "" },
+  "hero.slide3.subtitle.full": {
+    fr: "Mise en place de syst\u00e8mes d'aide \u00e0 la d\u00e9cision bas\u00e9s sur l'IA pour optimiser vos performances. Nous d\u00e9veloppons des solutions intelligentes qui analysent vos donn\u00e9es en temps r\u00e9el, identifient les tendances et proposent des recommandations strat\u00e9giques pour am\u00e9liorer votre comp\u00e9titivit\u00e9.",
+    en: "Implementation of AI-based decision support systems to optimize your performance. We develop intelligent solutions that analyze your data in real time, identify trends and propose strategic recommendations to improve your competitiveness."
+  },
+  "hero.slide4.title1": { fr: "Croissance", en: "Operational" },
+  "hero.slide4.title2": { fr: "Op\u00e9rationnelle", en: "Growth" },
+  "hero.slide4.title3": { fr: "", en: "" },
+  "hero.slide4.subtitle": {
+    fr: "Automatisation intelligente et optimisation des processus pour une croissance durable et mesurable. Nous transformons vos op\u00e9rations r\u00e9p\u00e9titives en processus automatis\u00e9s, r\u00e9duisant les co\u00fbts et lib\u00e9rant vos \u00e9quipes pour des t\u00e2ches \u00e0 plus forte valeur ajout\u00e9e.",
+    en: "Intelligent automation and process optimization for sustainable and measurable growth. We transform your repetitive operations into automated processes, reducing costs and freeing your teams for higher value-added tasks."
+  },
 
   // Services
   "services.tag": { fr: "Nos Services", en: "Our Services" },

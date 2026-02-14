@@ -23,10 +23,13 @@ function ServiceCard({ titleKey, descKey, Icon, index, isVisible }: {
     <div
       ref={magneticRef}
       className={cn(
-        "group relative rounded-xl border border-border/80 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:border-primary/50 hover:bg-card hover:shadow-lg hover:shadow-primary/5 hover:neon-glow magnetic-hover",
+        "group relative rounded-xl border border-border/80 bg-card/50 backdrop-blur-sm p-6 sm:p-8 transition-all duration-500 hover:border-primary/50 hover:bg-card hover:shadow-lg hover:shadow-primary/5 hover:neon-glow magnetic-hover",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
-      style={{ transitionDelay: isVisible ? `${(index + 1) * 150}ms` : "0ms" }}
+      style={{ 
+        transitionDelay: isVisible ? `${(index + 1) * 150}ms` : "0ms",
+        willChange: isVisible ? "auto" : "transform, opacity"
+      }}
     >
       {/* Gradient overlay au hover */}
       <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -50,7 +53,14 @@ function ServiceCard({ titleKey, descKey, Icon, index, isVisible }: {
 
       <Link
         href="/services"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:gap-2"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:gap-2 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background rounded-md px-2 py-1"
+        onClick={() => {
+          if (typeof window !== "undefined") {
+            import("@/lib/analytics").then(({ analytics }) => {
+              analytics.trackServiceClick(t(titleKey))
+            })
+          }
+        }}
       >
         {t("services.learnmore")}
         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -71,38 +81,38 @@ export function ServicesSection() {
   ]
 
   return (
-    <section id="services" className="relative py-24 lg:py-32 border-t border-border/50 bg-gradient-to-b from-background via-background to-muted/20 animated-gradient-bg">
+    <section id="services" className="relative py-16 sm:py-24 lg:py-32 border-t border-border/50 bg-gradient-to-b from-background via-background to-muted/20 animated-gradient-bg">
       {/* Séparateur décoratif */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
       {/* Éléments décoratifs subtils */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 right-10 h-1 w-1 rounded-full bg-primary/20 animate-pulse" style={{ animationDelay: "0.5s" }} />
-        <div className="absolute bottom-40 left-20 h-1.5 w-1.5 rounded-full bg-primary/15 animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-20 right-4 sm:right-10 h-1 w-1 rounded-full bg-primary/20 animate-pulse" style={{ animationDelay: "0.5s" }} />
+        <div className="absolute bottom-40 left-4 sm:left-20 h-1.5 w-1.5 rounded-full bg-primary/15 animate-pulse" style={{ animationDelay: "1s" }} />
         <div className="absolute top-1/2 right-1/4 h-1 w-1 rounded-full bg-primary/10 animate-pulse" style={{ animationDelay: "1.5s" }} />
       </div>
 
-      <div ref={ref} className="relative mx-auto max-w-7xl px-6 z-10">
+      <div ref={ref} className="relative mx-auto max-w-7xl px-4 sm:px-6 z-10">
         {/* Section Header */}
         <div className={cn(
-          "mb-16 max-w-2xl transition-all duration-700",
+          "mb-12 sm:mb-16 max-w-2xl transition-all duration-700",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 sm:px-4 py-1 sm:py-1.5">
+            <span className="text-[10px] sm:text-xs font-medium uppercase tracking-widest text-primary">
               {t("services.tag")}
             </span>
           </div>
-          <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground md:text-4xl lg:text-5xl text-balance">
             {t("services.title")}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
             {t("services.subtitle")}
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
           {services.map(({ titleKey, descKey, Icon }, i) => (
             <ServiceCard
               key={titleKey}

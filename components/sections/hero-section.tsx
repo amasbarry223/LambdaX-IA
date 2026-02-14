@@ -1,18 +1,14 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
-
-// Enregistrer ScrollTrigger
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
-}
+import { AIBackgroundData } from "@/components/hero/ai-background-data"
+import { AIBackgroundStrategy } from "@/components/hero/ai-background-strategy"
+import { AIBackgroundDecision } from "@/components/hero/ai-background-decision"
 
 // Variantes d'animation
 const containerVariants = {
@@ -32,252 +28,257 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: [0.4, 0, 0.2, 1] as const,
     },
   },
 }
 
-const titleVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.4, 0, 0.2, 1] as const,
-    },
-  },
+type Slide = {
+  id: number
+  title: string
+  subtitle: string
+  background: React.ReactNode
 }
 
 export function HeroSection() {
   const { t } = useI18n()
   const prefersReducedMotion = useReducedMotion()
-  const sectionRef = useRef<HTMLElement>(null)
-  const visualElementRef = useRef<HTMLDivElement>(null)
-  const ringsRef = useRef<HTMLDivElement[]>([])
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const touchStartXRef = useRef<number | null>(null)
+  const touchEndXRef = useRef<number | null>(null)
 
-  // Animations GSAP pour les éléments visuels
+  // Configuration des 3 slides
+  const slides: Slide[] = [
+    {
+      id: 0,
+      title: t("hero.slide1.title"),
+      subtitle: t("hero.slide1.subtitle"),
+      background: <AIBackgroundData />,
+    },
+    {
+      id: 1,
+      title: t("hero.slide2.title"),
+      subtitle: t("hero.slide2.subtitle"),
+      background: <AIBackgroundStrategy />,
+    },
+    {
+      id: 2,
+      title: t("hero.slide3.title"),
+      subtitle: t("hero.slide3.subtitle"),
+      background: <AIBackgroundDecision />,
+    },
+  ]
+
+  // Auto-play du slider
   useEffect(() => {
-    if (typeof window === "undefined" || prefersReducedMotion) return
+    if (prefersReducedMotion || isPaused) return
 
-    const ctx = gsap.context(() => {
-      // Animation des cercles rotatifs avec GSAP (plus fluide que CSS)
-      ringsRef.current.forEach((ring, index) => {
-        if (ring) {
-          const duration = [20, 15, 25][index] || 20
-          const direction = index === 1 ? -1 : 1
-          
-          gsap.to(ring, {
-            rotation: 360 * direction,
-            duration: duration,
-            repeat: -1,
-            ease: "none",
-          })
-        }
-      })
+    autoPlayIntervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
 
-      // Animation parallaxe pour l'élément visuel au scroll
-      if (visualElementRef.current) {
-        gsap.to(visualElementRef.current, {
-          y: -30,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        })
+    return () => {
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current)
       }
+    }
+  }, [prefersReducedMotion, isPaused, slides.length])
 
-      // Animation des éléments décoratifs au scroll
-      const decorativeDots = sectionRef.current?.querySelectorAll(".decorative-dot")
-      decorativeDots?.forEach((dot, index) => {
-        gsap.to(dot, {
-          y: (index % 2 === 0 ? -20 : 20),
-          opacity: 0.3,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        })
-      })
-    }, sectionRef)
+  // Navigation manuelle
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index)
+    setIsPaused(true)
+    setTimeout(() => setIsPaused(false), 10000)
+  }
 
-    return () => ctx.revert()
-  }, [prefersReducedMotion])
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    setIsPaused(true)
+    setTimeout(() => setIsPaused(false), 10000)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    setIsPaused(true)
+    setTimeout(() => setIsPaused(false), 10000)
+  }
+
+  // Swipe gestures pour mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndXRef.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStartXRef.current || !touchEndXRef.current) return
+
+    const diff = touchStartXRef.current - touchEndXRef.current
+    const minSwipeDistance = 50
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        nextSlide()
+      } else {
+        prevSlide()
+      }
+    }
+
+    touchStartXRef.current = null
+    touchEndXRef.current = null
+  }
 
   return (
-    <section ref={sectionRef} className="relative min-h-[calc(100vh-73px)] flex items-center overflow-hidden grid-bg animated-gradient-bg">
-      {/* Gradient de transition vers la section suivante */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-20" />
-      
-      {/* Blur morph shapes - Effet moderne */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-blur-morph" style={{ animationDelay: "0s" }} />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-blur-morph" style={{ animationDelay: "5s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/8 rounded-full blur-3xl animate-blur-morph" style={{ animationDelay: "10s" }} />
-      </div>
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="decorative-dot absolute top-20 left-10 h-1 w-1 rounded-full bg-primary/60 animate-pulse-glow" />
-        <div className="decorative-dot absolute top-40 right-20 h-1.5 w-1.5 rounded-full bg-primary/40 animate-pulse-glow" style={{ animationDelay: "0.5s" }} />
-        <div className="decorative-dot absolute bottom-40 left-1/4 h-1 w-1 rounded-full bg-primary/50 animate-pulse-glow" style={{ animationDelay: "1s" }} />
-        <div className="decorative-dot absolute top-1/3 right-1/3 h-2 w-2 rounded-full bg-primary/20 animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
-        {/* Neon line decorations */}
-        <div className="absolute top-1/4 left-0 h-px w-32 bg-gradient-to-r from-primary/30 to-transparent" />
-        <div className="absolute bottom-1/3 right-0 h-px w-48 bg-gradient-to-l from-primary/20 to-transparent" />
+    <section
+      id="hero"
+      className="relative flex items-center justify-center overflow-hidden border-b border-border/50"
+      aria-label="Section principale"
+      role="region"
+      style={{ minHeight: "calc(100vh - 73px)", maxHeight: "800px" }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Arrière-plan du slide actuel */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="absolute inset-0"
+          >
+            {slides[currentSlide].background}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:py-32 w-full z-10">
-        <motion.div
-          className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:gap-16"
-          variants={prefersReducedMotion ? {} : containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Text Content */}
-          <motion.div className="flex-1" variants={prefersReducedMotion ? {} : itemVariants}>
+      {/* Contenu principal */}
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 py-16 sm:py-20 text-center w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            variants={prefersReducedMotion ? {} : containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="space-y-6 sm:space-y-8"
+          >
+            {/* Badge */}
             <motion.div
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5"
               variants={prefersReducedMotion ? {} : itemVariants}
+              className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
             >
-              <motion.div
-                className="h-1.5 w-1.5 rounded-full bg-primary"
-                animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
+              <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-xs font-medium uppercase tracking-widest text-primary">
                 {t("hero.tag")}
               </span>
             </motion.div>
 
+            {/* Titre principal */}
             <motion.h1
-              className="font-heading text-5xl font-black leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl xl:text-8xl"
-              variants={prefersReducedMotion ? {} : titleVariants}
+              variants={prefersReducedMotion ? {} : itemVariants}
+              className="font-heading text-4xl font-black leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              <motion.span className="block" variants={prefersReducedMotion ? {} : itemVariants}>
-                {t("hero.title1")}
-              </motion.span>
-              <motion.span
-                className="block text-primary neon-text"
-                variants={prefersReducedMotion ? {} : itemVariants}
-                animate={prefersReducedMotion ? {} : { textShadow: ["0 0 10px hsl(120 100% 50% / 0.5)", "0 0 20px hsl(120 100% 50% / 0.8)", "0 0 10px hsl(120 100% 50% / 0.5)"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {t("hero.title2")}
-              </motion.span>
-              <motion.span className="block" variants={prefersReducedMotion ? {} : itemVariants}>
-                {t("hero.title3")}
-              </motion.span>
-              <motion.span
-                className="block text-primary neon-text"
-                variants={prefersReducedMotion ? {} : itemVariants}
-                animate={prefersReducedMotion ? {} : { textShadow: ["0 0 10px hsl(120 100% 50% / 0.5)", "0 0 20px hsl(120 100% 50% / 0.8)", "0 0 10px hsl(120 100% 50% / 0.5)"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              >
-                {t("hero.title4")}
-              </motion.span>
+              <span className="block text-primary neon-text">
+                {slides[currentSlide].title}
+              </span>
             </motion.h1>
 
+            {/* Sous-titre */}
             <motion.p
-              className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg"
               variants={prefersReducedMotion ? {} : itemVariants}
+              className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
             >
-              {t("hero.subtitle")}
+              {slides[currentSlide].subtitle}
             </motion.p>
 
+            {/* CTA Buttons */}
             <motion.div
-              className="mt-10 flex flex-wrap gap-4"
               variants={prefersReducedMotion ? {} : itemVariants}
+              className="flex flex-wrap items-center justify-center gap-4 pt-4"
             >
-              <motion.div
-                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
-                whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
+              <Link
+                href="/services"
+                className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:neon-glow hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    import("@/lib/analytics").then(({ analytics }) => {
+                      analytics.trackCTA("hero", t("hero.cta1"))
+                    })
+                  }
+                }}
               >
-                <Link
-                  href="/services"
-                  className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:neon-glow hover:brightness-110 magnetic-hover animate-glow-pulse"
-                >
-                  {t("hero.cta1")}
-                  <motion.div
-                    animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.div>
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
-                whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
+                {t("hero.cta1")}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    import("@/lib/analytics").then(({ analytics }) => {
+                      analytics.trackCTA("hero", t("hero.cta2"))
+                    })
+                  }
+                }}
               >
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
-                >
-                  {t("hero.cta2")}
-                </Link>
-              </motion.div>
+                {t("hero.cta2")}
+              </Link>
             </motion.div>
           </motion.div>
+        </AnimatePresence>
 
-          {/* Visual Element */}
-          <div ref={visualElementRef} className="relative flex-1 hidden lg:flex items-center justify-center">
-            <div className="relative">
-              {/* Main visual - Abstract AI brain */}
-              <div className="relative h-80 w-80 xl:h-96 xl:w-96">
-                {/* Outer ring */}
-                <div
-                  ref={(el) => {
-                    if (el) ringsRef.current[0] = el
-                  }}
-                  className="absolute inset-0 rounded-full border border-primary/20"
-                />
-                <div
-                  ref={(el) => {
-                    if (el) ringsRef.current[1] = el
-                  }}
-                  className="absolute inset-4 rounded-full border border-primary/15"
-                />
-                <div
-                  ref={(el) => {
-                    if (el) ringsRef.current[2] = el
-                  }}
-                  className="absolute inset-8 rounded-full border border-primary/10"
-                />
+        {/* Navigation Controls */}
+        <div className="mt-8 sm:mt-10 flex items-center justify-center gap-4">
+          {/* Bouton précédent */}
+          <button
+            onClick={prevSlide}
+            className="group flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
+            aria-label="Slide précédent"
+          >
+            <ChevronLeft className="h-5 w-5 text-foreground transition-colors group-hover:text-primary" />
+          </button>
 
-                {/* Center element */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    <div className="h-32 w-32 rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-sm neon-glow animate-float animate-glow-pulse flex items-center justify-center">
-                      <span className="font-heading text-5xl font-black text-primary neon-text">{"\u03BB"}</span>
-                    </div>
-                    {/* Orbiting dots */}
-                    <div className="absolute -top-3 -right-3 h-3 w-3 rounded-full bg-primary/60 animate-pulse" />
-                    <div className="absolute -bottom-2 -left-2 h-2 w-2 rounded-full bg-primary/40 animate-pulse" style={{ animationDelay: "1s" }} />
-                    <div className="absolute top-1/2 -right-6 h-2 w-2 rounded-full bg-primary/50 animate-pulse" style={{ animationDelay: "0.5s" }} />
-                  </div>
-                </div>
-
-                {/* Connection lines */}
-                <div className="absolute top-1/4 left-0 h-px w-16 bg-gradient-to-r from-transparent to-primary/30" />
-                <div className="absolute bottom-1/4 right-0 h-px w-16 bg-gradient-to-l from-transparent to-primary/30" />
-                <div className="absolute top-0 left-1/2 w-px h-16 bg-gradient-to-b from-transparent to-primary/30" />
-                <div className="absolute bottom-0 left-1/2 w-px h-16 bg-gradient-to-t from-transparent to-primary/30" />
-              </div>
-            </div>
+          {/* Indicateurs de slides */}
+          <div className="flex items-center gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background ${
+                  index === currentSlide
+                    ? "w-8 bg-primary"
+                    : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                }`}
+                aria-label={`Aller au slide ${index + 1}`}
+              />
+            ))}
           </div>
-        </motion.div>
+
+          {/* Bouton suivant */}
+          <button
+            onClick={nextSlide}
+            className="group flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
+            aria-label="Slide suivant"
+          >
+            <ChevronRight className="h-5 w-5 text-foreground transition-colors group-hover:text-primary" />
+          </button>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
         >
           <motion.span
             className="text-xs tracking-widest text-muted-foreground uppercase"
@@ -287,10 +288,10 @@ export function HeroSection() {
             {t("hero.scroll")}
           </motion.span>
           <motion.div
-            animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
+            animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown className="h-4 w-4 text-primary" />
+            <ChevronDown className="h-4 w-4 text-primary/60" />
           </motion.div>
         </motion.div>
       </div>

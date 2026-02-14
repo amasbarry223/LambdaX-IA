@@ -26,8 +26,8 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 lg:py-32 grid-bg">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative py-16 sm:py-24 lg:py-32 grid-bg">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 animate-fade-in-up">
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -35,10 +35,10 @@ export default function ContactPage() {
                 {t("contact.tag")}
               </span>
             </div>
-            <h1 className="font-heading text-4xl font-black text-foreground sm:text-5xl lg:text-6xl animate-fade-in-up text-balance" style={{ animationDelay: "0.1s" }}>
+            <h1 className="font-heading text-3xl sm:text-4xl font-black text-foreground md:text-5xl lg:text-6xl animate-fade-in-up text-balance" style={{ animationDelay: "0.1s" }}>
               {t("contact.title")}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground animate-fade-in-up text-pretty" style={{ animationDelay: "0.2s" }}>
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground animate-fade-in-up text-pretty" style={{ animationDelay: "0.2s" }}>
               {t("contact.subtitle")}
             </p>
           </div>
@@ -46,16 +46,16 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-24 lg:py-32 border-t border-border">
-        <div ref={formRef} className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-5">
+      <section className="py-16 sm:py-24 lg:py-32 border-t border-border">
+        <div ref={formRef} className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid gap-8 sm:gap-12 lg:grid-cols-5">
             {/* Contact Form */}
             <div className={cn(
               "lg:col-span-3 transition-all duration-700",
               formVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             )}>
-              <form onSubmit={handleSubmit} className="rounded-lg border border-border bg-card p-8 lg:p-10">
-                <div className="grid gap-6 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} className="rounded-lg border border-border bg-card p-6 sm:p-8 lg:p-10">
+                <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
@@ -113,7 +113,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Message */}
-                <div className="mt-6">
+                <div className="mt-4 sm:mt-6">
                   <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
                     {t("contact.message")}
                   </label>
@@ -127,7 +127,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit */}
-                <div className="mt-8">
+                <div className="mt-6 sm:mt-8">
                   {submitted ? (
                     <div className="flex items-center gap-2 rounded-md bg-primary/10 border border-primary/30 px-6 py-3.5 text-sm font-medium text-primary">
                       <CheckCircle className="h-4 w-4" />
@@ -151,7 +151,7 @@ export default function ContactPage() {
               "lg:col-span-2 transition-all duration-700 delay-200",
               formVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             )}>
-              <div className="rounded-lg border border-border bg-card p-8 lg:p-10 mb-6">
+              <div className="rounded-lg border border-border bg-card p-6 sm:p-8 lg:p-10 mb-4 sm:mb-6">
                 <h2 className="mb-6 font-heading text-xl font-bold text-foreground">
                   {t("contact.info.title")}
                 </h2>
@@ -176,7 +176,7 @@ export default function ContactPage() {
               </div>
 
               {/* Social Links */}
-              <div className="rounded-lg border border-border bg-card p-8">
+              <div className="rounded-lg border border-border bg-card p-6 sm:p-8">
                 <h3 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wider text-primary">
                   {"Social"}
                 </h3>

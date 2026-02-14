@@ -19,25 +19,30 @@ export function FAQSection() {
   ]
 
   return (
-    <section className="relative py-24 lg:py-32 border-t border-border">
-      <div ref={ref} className="mx-auto max-w-3xl px-6">
+    <section 
+      id="faq" 
+      className="relative py-16 sm:py-24 lg:py-32 border-t border-border"
+      aria-label="Section questions fréquentes"
+      role="region"
+    >
+      <div ref={ref} className="mx-auto max-w-3xl px-4 sm:px-6">
         {/* Section Header */}
         <div className={cn(
-          "mb-16 text-center transition-all duration-700",
+          "mb-12 sm:mb-16 text-center transition-all duration-700",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 sm:px-4 py-1 sm:py-1.5">
+            <span className="text-[10px] sm:text-xs font-medium uppercase tracking-widest text-primary">
               {t("faq.tag")}
             </span>
           </div>
-          <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground md:text-4xl lg:text-5xl text-balance">
             {t("faq.title")}
           </h2>
         </div>
 
         {/* FAQ Items */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i
             return (
@@ -52,17 +57,17 @@ export function FAQSection() {
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 p-6 text-left"
+                  className="flex w-full items-center justify-between gap-3 sm:gap-4 p-4 sm:p-6 text-left"
                   aria-expanded={isOpen}
                 >
                   <span className={cn(
-                    "font-heading text-base font-semibold transition-colors",
+                    "font-heading text-sm sm:text-base font-semibold transition-colors",
                     isOpen ? "text-primary" : "text-foreground"
                   )}>
                     {t(faq.q)}
                   </span>
                   <Plus className={cn(
-                    "h-5 w-5 shrink-0 text-primary transition-transform duration-300",
+                    "h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-primary transition-transform duration-300",
                     isOpen && "rotate-45"
                   )} />
                 </button>
@@ -70,7 +75,7 @@ export function FAQSection() {
                   "overflow-hidden transition-all duration-300",
                   isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 )}>
-                  <p className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground">
+                  <p className="px-4 sm:px-6 pb-4 sm:pb-6 text-xs sm:text-sm leading-relaxed text-muted-foreground">
                     {t(faq.a)}
                   </p>
                 </div>

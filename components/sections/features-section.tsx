@@ -18,15 +18,15 @@ function StatCard({ value, suffix, label, delay, isVisible }: {
   return (
     <div
       className={cn(
-        "rounded-lg border border-border bg-card p-6 text-center transition-all duration-700 hover:border-primary/30",
+        "rounded-lg border border-border bg-card p-4 sm:p-6 text-center transition-all duration-700 hover:border-primary/30",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="font-heading text-3xl font-black text-primary neon-text lg:text-4xl">
+      <div className="font-heading text-2xl sm:text-3xl font-black text-primary neon-text lg:text-4xl">
         {suffix === "%" || suffix === "x" ? `${count}${suffix}` : `${suffix}${count}`}
       </div>
-      <div className="mt-2 text-sm text-muted-foreground">{label}</div>
+      <div className="mt-2 text-xs sm:text-sm text-muted-foreground">{label}</div>
     </div>
   )
 }
@@ -48,28 +48,33 @@ export function FeaturesSection() {
   ]
 
   return (
-    <section className="relative py-24 lg:py-32 border-t border-border">
-      <div ref={ref} className="mx-auto max-w-7xl px-6">
+    <section 
+      id="features" 
+      className="relative py-16 sm:py-24 lg:py-32 border-t border-border"
+      aria-label="Section fonctionnalités"
+      role="region"
+    >
+      <div ref={ref} className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Section Header */}
         <div className={cn(
-          "mb-16 max-w-2xl transition-all duration-700",
+          "mb-12 sm:mb-16 max-w-2xl transition-all duration-700",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
-            <span className="text-xs font-medium uppercase tracking-widest text-primary">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 sm:px-4 py-1 sm:py-1.5">
+            <span className="text-[10px] sm:text-xs font-medium uppercase tracking-widest text-primary">
               {t("features.tag")}
             </span>
           </div>
-          <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground md:text-4xl lg:text-5xl text-balance">
             {t("features.title")}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
             {t("features.subtitle")}
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6 mb-16">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-6 mb-12 sm:mb-16">
           {stats.map((stat, i) => (
             <StatCard
               key={stat.labelKey}
@@ -84,13 +89,13 @@ export function FeaturesSection() {
 
         {/* Capabilities */}
         <div className={cn(
-          "rounded-lg border border-border bg-card p-8 lg:p-12 transition-all duration-700 delay-500",
+          "rounded-lg border border-border bg-card p-6 sm:p-8 lg:p-12 transition-all duration-700 delay-500",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
-          <h3 className="font-heading text-2xl font-bold text-foreground mb-8">
+          <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8">
             {t("features.tag")}
           </h3>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((capKey, i) => (
               <div
                 key={capKey}

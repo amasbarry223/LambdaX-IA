@@ -24,8 +24,8 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-24 lg:py-32 grid-bg">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative py-16 sm:py-24 lg:py-32 grid-bg">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 animate-fade-in-up">
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -33,10 +33,10 @@ export default function AboutPage() {
                 {t("about.tag")}
               </span>
             </div>
-            <h1 className="font-heading text-4xl font-black text-foreground sm:text-5xl lg:text-6xl animate-fade-in-up text-balance" style={{ animationDelay: "0.1s" }}>
+            <h1 className="font-heading text-3xl sm:text-4xl font-black text-foreground md:text-5xl lg:text-6xl animate-fade-in-up text-balance" style={{ animationDelay: "0.1s" }}>
               {t("about.title")}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground animate-fade-in-up text-pretty" style={{ animationDelay: "0.2s" }}>
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground animate-fade-in-up text-pretty" style={{ animationDelay: "0.2s" }}>
               {t("about.subtitle")}
             </p>
           </div>
@@ -44,13 +44,13 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-24 lg:py-32 border-t border-border">
-        <div ref={missionRef} className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-8 lg:grid-cols-2">
+      <section className="py-16 sm:py-24 lg:py-32 border-t border-border">
+        <div ref={missionRef} className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
             {/* Mission */}
             <div
               className={cn(
-                "group rounded-lg border border-border bg-card p-8 lg:p-10 transition-all duration-700 hover:border-primary/40 hover:neon-glow",
+                "group rounded-lg border border-border bg-card p-6 sm:p-8 lg:p-10 transition-all duration-700 hover:border-primary/40 hover:neon-glow",
                 missionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
               )}
               style={{ transitionDelay: "150ms" }}
@@ -69,7 +69,7 @@ export default function AboutPage() {
             {/* Vision */}
             <div
               className={cn(
-                "group rounded-lg border border-border bg-card p-8 lg:p-10 transition-all duration-700 hover:border-primary/40 hover:neon-glow",
+                "group rounded-lg border border-border bg-card p-6 sm:p-8 lg:p-10 transition-all duration-700 hover:border-primary/40 hover:neon-glow",
                 missionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
               )}
               style={{ transitionDelay: "300ms" }}
@@ -89,18 +89,18 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-24 lg:py-32 border-t border-border">
-        <div ref={valuesRef} className="mx-auto max-w-7xl px-6">
+      <section className="py-16 sm:py-24 lg:py-32 border-t border-border">
+        <div ref={valuesRef} className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className={cn(
-            "mb-16 text-center max-w-2xl mx-auto transition-all duration-700",
+            "mb-12 sm:mb-16 text-center max-w-2xl mx-auto transition-all duration-700",
             valuesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
-            <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground md:text-4xl lg:text-5xl text-balance">
               {t("about.values.title")}
             </h2>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map(({ icon: Icon, titleKey, descKey }, i) => (
               <div
                 key={titleKey}
@@ -126,23 +126,23 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 lg:py-32 border-t border-border grid-bg">
-        <div ref={teamRef} className="mx-auto max-w-7xl px-6">
+      <section className="py-16 sm:py-24 lg:py-32 border-t border-border grid-bg">
+        <div ref={teamRef} className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className={cn(
             "mx-auto max-w-3xl text-center transition-all duration-700",
             teamVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
-            <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground md:text-4xl lg:text-5xl text-balance">
               {t("about.team.title")}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
+            <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-muted-foreground lg:text-lg text-pretty">
               {t("about.team.desc")}
             </p>
           </div>
 
           {/* Team grid visual */}
           <div className={cn(
-            "mt-16 grid grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-6 transition-all duration-700 delay-300",
+            "mt-12 sm:mt-16 grid grid-cols-3 gap-3 sm:gap-4 sm:grid-cols-4 lg:grid-cols-6 transition-all duration-700 delay-300",
             teamVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
             {Array.from({ length: 6 }).map((_, i) => (
@@ -160,15 +160,15 @@ export default function AboutPage() {
 
           {/* CTA */}
           <div className={cn(
-            "mt-16 text-center transition-all duration-700 delay-500",
+            "mt-12 sm:mt-16 text-center transition-all duration-700 delay-500",
             teamVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-md bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:neon-glow hover:brightness-110"
+              className="group inline-flex items-center gap-2 rounded-md bg-primary px-6 py-2.5 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-semibold text-primary-foreground transition-all duration-300 hover:neon-glow hover:brightness-110"
             >
               {t("cta.btn1")}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
